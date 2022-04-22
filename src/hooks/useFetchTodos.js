@@ -1,17 +1,15 @@
 // Store
-import {useDispatch} from "react-redux";
+import { useDispatch } from 'react-redux';
 // Actions
-import {dataActions} from "../redux/actions/dataActions";
+import { dataActions } from '../redux/actions/dataActions';
 
 export const useFetchTodos = () => {
+  const dispatch = useDispatch();
+  const { fetchToDos } = dataActions;
 
-    const dispatch = useDispatch();
-    const {fetchToDos} = dataActions
+  const fetchData = () => {
+    dispatch(fetchToDos());
+  };
 
-    const fetchData = () => {
-        dispatch(fetchToDos())
-    }
-
-    return {fetchData}
-
+  return { fetchData };
 };

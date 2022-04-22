@@ -1,1 +1,1 @@
-export {fetchify} from './fetchify';
+export { fetchify } from './fetchify';
