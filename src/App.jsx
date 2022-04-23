@@ -1,7 +1,7 @@
 // Core
 import { useEffect } from 'react';
 // Hooks
-import { useFetchTodos, useStoragedTodos } from './hooks/index';
+import { useFetchTodos } from './hooks/index';
 // Store
 import { useSelector } from 'react-redux';
 // Helpers
@@ -10,11 +10,13 @@ import { fetchify } from '../src/helpers/index';
 import { ErrorMessage, TodosList } from './components/';
 
 export const App = () => {
-  const { storedTodosList } = useStoragedTodos();
+  // const { storedTodosList } = useStoragedTodos();
+  const todosList = useSelector((state) => state.todo.todosList);
+
   const { fetchData } = useFetchTodos();
 
   useEffect(() => {
-    if (!storedTodosList.length) fetchData();
+    if (!todosList.length) fetchData();
   }, []);
 
   const isLoading = useSelector((state) => state.ui.isLoading);
