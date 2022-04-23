@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { uiActions } from './uiActions';
-import { CLEAR_ERROR, SET_LOADER, SET_TODOS, SET_ERROR } from '../../constnts/constants';
+import {
+  CLEAR_ERROR,
+  SET_LOADER,
+  SET_TODOS,
+  SET_ERROR,
+  SET_TODO_ITEM_STATE
+} from '../../constnts/constants';
 
 export const dataActions = {
   fetchToDos: () => (dispatch) => {
@@ -29,6 +35,13 @@ export const dataActions = {
     return {
       type: SET_TODOS,
       payload: todosList
+    };
+  },
+
+  setTodoItemState: (id) => {
+    return {
+      type: SET_TODO_ITEM_STATE,
+      payload: id
     };
   },
 
