@@ -10,7 +10,6 @@ import { fetchify } from '../src/helpers/index';
 import { ErrorMessage, TodosList } from './components/';
 
 export const App = () => {
-  // const { storedTodosList } = useStoragedTodos();
   const todosList = useSelector((state) => state.todo.todosList);
 
   const { fetchData } = useFetchTodos();

@@ -1,17 +1,13 @@
 // Styles
 import { PacmanLoader } from 'react-spinners';
 
-export const fetchify = (isLoading, content, color = '#a84a4a') => {
+export const fetchify = (isLoading, content, color = '#f471b5') => {
   if (isLoading) {
     return (
-      <div style={pacmanStyles}>
+      <section className="flex items-center w-full justify-center">
         <PacmanLoader color={color} />
-      </div>
+      </section>
     );
   }
   return content;
-};
-
-const pacmanStyles = {
-  alignSelf: 'center'
 };

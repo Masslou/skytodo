@@ -1,19 +1,41 @@
+// Core
+import { useCallback } from 'react';
 // Store
-import { useSelector } from 'react-redux';
-// Hooks
-// import { useStoragedTodos } from '../../hooks';
+import { useDispatch, useSelector } from 'react-redux';
+// Actions
+import { dataActions } from '../../redux/actions/dataActions';
 // Components
 import { TodoItem } from './item/TodoItem';
 
 export const TodosList = () => {
-  // const { storedTodosList } = useStoragedTodos();
+  const dispatch = useDispatch();
+  const { setTodoItemState, removeTodoItem } = dataActions;
   const todosList = useSelector((state) => state.todo.todosList);
 
+  const handleStatusClick = useCallback(
+    (id) => {
+      dispatch(setTodoItemState(id));
+    },
+    [todosList]
+  );
+
+  const handleRemoveTodo = useCallback(
+    (id) => {
+      dispatch(removeTodoItem(id));
+    },
+    [todosList]
+  );
+
   const todosJSX = () => {
-    // const todosResource = storedTodosList.length ? storedTodosList : todosList;
-    // console.log(todosResource);
     return todosList.map((todo) => {
-      return <TodoItem key={todo.id} {...todo} />;
+      return (
+        <TodoItem
+          key={todo.id}
+          {...todo}
+          handleStatusClick={handleStatusClick}
+          handleRemoveTodo={handleRemoveTodo}
+        />
+      );
     });
   };
   return <>{todosJSX()}</>;

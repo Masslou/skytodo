@@ -1,4 +1,4 @@
-import { SET_LOADER } from '../../constnts/constants';
+import { SET_LOADER } from '../../constants/constants';
 
 export const uiActions = {
   setLoader: (loader) => {

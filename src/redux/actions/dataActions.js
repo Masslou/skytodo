@@ -5,17 +5,18 @@ import {
   SET_LOADER,
   SET_TODOS,
   SET_ERROR,
-  SET_TODO_ITEM_STATE
-} from '../../constnts/constants';
+  SET_TODO_ITEM_STATE,
+  REMOVE_TODO_ITEM
+} from '../../constants/constants';
 
 export const dataActions = {
   fetchToDos: () => (dispatch) => {
     dispatch(uiActions.setLoader(true));
+    dispatch(dataActions.clearError());
     axios
       .get(`${process.env.REACT_APP_TODOS_API_URL}`)
       .then((response) => {
         dispatch(uiActions.setLoader(false));
-        dispatch(dataActions.clearError());
         if (response.status === 200) {
           if (response.data) {
             console.log(response.data.data);
@@ -45,12 +46,20 @@ export const dataActions = {
     };
   },
 
+  removeTodoItem: (id) => {
+    return {
+      type: REMOVE_TODO_ITEM,
+      payload: id
+    };
+  },
+
   setLoader: (loader) => {
     return {
       type: SET_LOADER,
       payload: loader
     };
   },
+
   setError: (text) => {
     return {
       type: SET_ERROR,

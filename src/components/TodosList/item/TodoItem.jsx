@@ -1,35 +1,30 @@
-// Core
-import { useCallback } from 'react';
-// Store
-import { useDispatch, useSelector } from 'react-redux';
-// Actions
-import { dataActions } from '../../../redux/actions/dataActions';
 // Components
 import { Check } from './Check';
 // Instruments
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
-export const TodoItem = ({ id, title, status }) => {
-  const dispatch = useDispatch();
-  const { setTodoItemState } = dataActions;
-  const todosList = useSelector((state) => state.todo.todosList);
-
-  const handleStatusClick = useCallback(() => {
-    dispatch(setTodoItemState(id));
-  }, [todosList]);
+export const TodoItem = ({ id, title, status, handleStatusClick }) => {
+  const isCompleted = status === 'completed';
 
   return (
     <button
       className="flex items-center mb-4 rounded-2xl bg-zinc-800 p-5 w-full"
-      onClick={handleStatusClick}>
+      onClick={() => handleStatusClick(id)}>
       <Check status={status} />
-      {title}
+      <span
+        className={cn({
+          'line-through': isCompleted
+        })}>
+        {title}
+      </span>
     </button>
   );
 };
 
 TodoItem.propTypes = {
-  id: PropTypes.number,
-  title: PropTypes.string,
-  status: PropTypes.string
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  handleStatusClick: PropTypes.func.isRequired
 };
