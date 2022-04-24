@@ -19,7 +19,7 @@ export const TodosList = () => {
     [todosList]
   );
 
-  const handleRemoveTodo = useCallback(
+  const handleRemoveTodoClick = useCallback(
     (id) => {
       dispatch(removeTodoItem(id));
     },
@@ -33,7 +33,7 @@ export const TodosList = () => {
           key={todo.id}
           {...todo}
           handleStatusClick={handleStatusClick}
-          handleRemoveTodo={handleRemoveTodo}
+          handleRemoveTodoClick={handleRemoveTodoClick}
         />
       );
     });
