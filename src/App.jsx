@@ -7,12 +7,11 @@ import { useSelector } from 'react-redux';
 // Helpers
 import { fetchify } from '../src/helpers/index';
 // Components
-import { ErrorMessage, TodosList, Logo, CreateTodoField } from './components/';
+import { Logo, Main } from './components/';
 
 export const App = () => {
   const todosList = useSelector((state) => state.todo.todosList);
   const isLoading = useSelector((state) => state.ui.isLoading);
-  const error = useSelector((state) => state.todo.error);
 
   const { fetchData } = useFetchTodos();
 
@@ -23,9 +22,7 @@ export const App = () => {
   return (
     <section className="text-white w-4/5 mx-auto">
       <Logo />
-      <CreateTodoField />
-      {fetchify(isLoading, <TodosList />)}
-      {error && <ErrorMessage />}
+      {fetchify(isLoading, <Main />)}
     </section>
   );
 };
