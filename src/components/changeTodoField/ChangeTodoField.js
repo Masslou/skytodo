@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 // Actions
 import { dataActions } from '../../redux/actions/dataActions';
+// Instruments
+import PropTypes from 'prop-types';
 
-// eslint-disable-next-line react/prop-types
 export const ChangeTodoField = ({ setEditing, id, status, title }) => {
   const [localTitle, setLocalTitle] = useState(title);
   const inputRef = useRef(null);
@@ -18,7 +19,6 @@ export const ChangeTodoField = ({ setEditing, id, status, title }) => {
 
   const changeTodoHandler = () => {
     const todoData = { id, localTitle, status };
-    console.log(todoData);
     dispatch(editTodoItem(todoData));
     setEditing(false);
   };
@@ -31,12 +31,17 @@ export const ChangeTodoField = ({ setEditing, id, status, title }) => {
         ref={inputRef}
         value={localTitle}
         onChange={(e) => setLocalTitle(e.target.value)}
-        onBlur={() => {
-          setEditing(false);
-        }}
+        onBlur={() => setEditing(false)}
         placeholder="Change a task"
         onKeyPress={(e) => e.key === 'Enter' && changeTodoHandler(localTitle, id, status)}
       />
     </section>
   );
+};
+
+ChangeTodoField.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  setEditing: PropTypes.func.isRequired
 };
