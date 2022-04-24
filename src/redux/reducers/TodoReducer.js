@@ -3,7 +3,8 @@ import {
   CLEAR_ERROR,
   SET_TODOS,
   SET_TODO_ITEM_STATE,
-  REMOVE_TODO_ITEM
+  REMOVE_TODO_ITEM,
+  ADD_TODO_ITEM
 } from '../../constants/constants';
 
 const initialState = {
@@ -35,6 +36,17 @@ export const todoReducer = (state = initialState, actions) => {
       const oldTodosList = [...state.todosList];
       const newTodosList = oldTodosList.filter((item) => item.id !== actions.payload);
 
+      return { ...state, todosList: newTodosList };
+    }
+
+    case ADD_TODO_ITEM: {
+      const newToDo = {
+        id: new Date(),
+        title: actions.payload,
+        status: 'pending'
+      };
+
+      const newTodosList = [newToDo, ...state.todosList];
       return { ...state, todosList: newTodosList };
     }
 

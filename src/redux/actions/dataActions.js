@@ -6,7 +6,8 @@ import {
   SET_TODOS,
   SET_ERROR,
   SET_TODO_ITEM_STATE,
-  REMOVE_TODO_ITEM
+  REMOVE_TODO_ITEM,
+  ADD_TODO_ITEM
 } from '../../constants/constants';
 
 export const dataActions = {
@@ -36,6 +37,13 @@ export const dataActions = {
     return {
       type: SET_TODOS,
       payload: todosList
+    };
+  },
+
+  addTodoItem: (title) => {
+    return {
+      type: ADD_TODO_ITEM,
+      payload: title
     };
   },
 
