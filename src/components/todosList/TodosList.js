@@ -12,15 +12,24 @@ export const TodosList = () => {
   const { setTodoItemState, removeTodoItem } = dataActions;
   const todosList = useSelector((state) => state.todo.todosList);
 
-  const handleStatusClick = useCallback(
+  const toggleTodoHandler = useCallback(
     (id) => {
       dispatch(setTodoItemState(id));
     },
     [todosList]
   );
 
-  const handleRemoveTodoClick = useCallback(
-    (id) => {
+  const changeTodoHandler = useCallback(
+    (e, id) => {
+      e.stopPropagation();
+      dispatch(setTodoItemState(id));
+    },
+    [todosList]
+  );
+
+  const removeTodoHandler = useCallback(
+    (e, id) => {
+      e.stopPropagation();
       dispatch(removeTodoItem(id));
     },
     [todosList]
@@ -32,8 +41,9 @@ export const TodosList = () => {
         <TodoItem
           key={todo.id}
           {...todo}
-          handleStatusClick={handleStatusClick}
-          handleRemoveTodoClick={handleRemoveTodoClick}
+          toggleTodoHandler={toggleTodoHandler}
+          removeTodoHandler={removeTodoHandler}
+          changeTodoHandler={changeTodoHandler}
         />
       );
     });

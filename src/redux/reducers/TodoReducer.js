@@ -4,7 +4,8 @@ import {
   SET_TODOS,
   SET_TODO_ITEM_STATE,
   REMOVE_TODO_ITEM,
-  ADD_TODO_ITEM
+  ADD_TODO_ITEM,
+  EDIT_TODO_ITEM
 } from '../../constants/constants';
 
 const initialState = {
@@ -37,6 +38,18 @@ export const todoReducer = (state = initialState, actions) => {
       const newTodosList = oldTodosList.filter((item) => item.id !== actions.payload);
 
       return { ...state, todosList: newTodosList };
+    }
+
+    case EDIT_TODO_ITEM: {
+      const updatedTodosList = state.todosList.map((item) => {
+        if (item.id === actions.payload.id) {
+          return { ...item, title: actions.payload.localTitle };
+        } else {
+          return item;
+        }
+      });
+      console.log('newList', updatedTodosList);
+      return { ...state, todosList: updatedTodosList };
     }
 
     case ADD_TODO_ITEM: {

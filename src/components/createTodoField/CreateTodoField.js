@@ -17,7 +17,7 @@ export const CreateTodoField = () => {
 
   const [title, setTitle] = useState('');
 
-  const handleAddTodoClick = useCallback(
+  const addTodoHandler = useCallback(
     (title) => {
       dispatch(addTodoItem(title));
       setTitle('');
@@ -34,7 +34,7 @@ export const CreateTodoField = () => {
         ref={inputRef}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Add a task"
-        onKeyPress={(e) => e.key === 'Enter' && handleAddTodoClick(title)}
+        onKeyPress={(e) => e.key === 'Enter' && addTodoHandler(title)}
       />
     </section>
   );
