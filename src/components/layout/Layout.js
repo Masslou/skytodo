@@ -1,3 +1,5 @@
+// Core
+import React from 'react';
 // Instruments
 import PropTypes from 'prop-types';
 

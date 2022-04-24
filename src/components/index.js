@@ -1,6 +1,6 @@
-export { ErrorMessage } from './ErrorMessage';
-export { Layout } from './Layout';
-export { TodosList } from './TodosList/TodosList';
-export { Logo } from './Logo';
-export { CreateTodoField } from './CreateTodoField';
-export { Main } from './Main';
+export { ErrorMessage } from './errorMessage/ErrorMessage';
+export { Layout } from './layout/Layout';
+export { TodosList } from './todosList/TodosList';
+export { Logo } from './logo/Logo';
+export { CreateTodoField } from './createTodoField/CreateTodoField';
+export { Main } from './main/Main';

@@ -1,7 +1,7 @@
 // Store
 import { useSelector } from 'react-redux';
 // Components
-import { CreateTodoField, TodosList, ErrorMessage } from './index';
+import { CreateTodoField, TodosList, ErrorMessage } from '../index';
 
 export const Main = () => {
   const error = useSelector((state) => state.todo.error);

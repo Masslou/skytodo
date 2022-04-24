@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState, useRef } from 'react';
 // Store
 import { useDispatch, useSelector } from 'react-redux';
 // Actions
-import { dataActions } from '../redux/actions/dataActions';
+import { dataActions } from '../../redux/actions/dataActions';
 
 export const CreateTodoField = () => {
   useEffect(() => {

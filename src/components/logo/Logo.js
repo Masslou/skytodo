@@ -1,5 +1,5 @@
 // Images
-import { images } from '../theme/img';
+import { images } from '../../theme/img';
 
 export const Logo = () => {
   return (
