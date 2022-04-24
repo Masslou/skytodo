@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 // Helpers
 import { fetchify } from '../src/helpers/index';
 // Components
-import { ErrorMessage, TodosList } from './components/';
+import { ErrorMessage, TodosList, Logo } from './components/';
 
 export const App = () => {
   const todosList = useSelector((state) => state.todo.todosList);
@@ -23,7 +23,7 @@ export const App = () => {
 
   return (
     <section className="text-white w-4/5 mx-auto">
-      <h1 className="text-2xl font-bold text-center mb-10">Masslou Todo</h1>
+      <Logo />
       {fetchify(isLoading, <TodosList />)}
       {error && <ErrorMessage />}
     </section>
