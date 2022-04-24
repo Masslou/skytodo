@@ -1,6 +1,9 @@
-import { BsCheck } from 'react-icons/bs';
+// Instruments
 import PropTypes from 'prop-types';
+// Styles
 import cn from 'classnames';
+// Icons
+import { BsCheck } from 'react-icons/bs';
 
 export const Check = ({ status }) => {
   const isCompleted = status === 'completed';
