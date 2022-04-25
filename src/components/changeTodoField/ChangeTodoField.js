@@ -7,7 +7,7 @@ import { dataActions } from '../../redux/actions/dataActions';
 // Instruments
 import PropTypes from 'prop-types';
 
-export const ChangeTodoField = ({ setEditing, id, status, title }) => {
+export const ChangeTodoField = ({ setIdEditing, id, status, title }) => {
   const [localTitle, setLocalTitle] = useState(title);
   const inputRef = useRef(null);
   useEffect(() => {
@@ -20,7 +20,7 @@ export const ChangeTodoField = ({ setEditing, id, status, title }) => {
   const changeTodoHandler = () => {
     const todoData = { id, localTitle, status };
     dispatch(editTodoItem(todoData));
-    setEditing(false);
+    setIdEditing('');
   };
 
   return (
@@ -31,7 +31,7 @@ export const ChangeTodoField = ({ setEditing, id, status, title }) => {
         ref={inputRef}
         value={localTitle}
         onChange={(e) => setLocalTitle(e.target.value)}
-        onBlur={() => setEditing(false)}
+        onBlur={() => setIdEditing('')}
         placeholder="Change a task"
         onKeyPress={(e) => e.key === 'Enter' && changeTodoHandler(localTitle, id, status)}
       />
@@ -43,5 +43,5 @@ ChangeTodoField.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
-  setEditing: PropTypes.func.isRequired
+  setIdEditing: PropTypes.func.isRequired
 };

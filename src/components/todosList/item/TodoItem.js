@@ -1,8 +1,5 @@
-// Core
-import { useCallback, useState } from 'react';
 // Components
 import { Check } from './Check';
-import { ChangeTodoField } from '../../changeTodoField/ChangeTodoField';
 // Instruments
 import PropTypes from 'prop-types';
 // Styles
@@ -10,27 +7,22 @@ import cn from 'classnames';
 // Icons
 import { BsTrash } from 'react-icons/bs';
 import { VscEdit } from 'react-icons/vsc';
-import { useSelector } from 'react-redux';
 
-export const TodoItem = ({ id, title, status, toggleTodoHandler, removeTodoHandler }) => {
+export const TodoItem = ({
+  id,
+  title,
+  status,
+  toggleTodoHandler,
+  removeTodoHandler,
+  editTodoHandler,
+  setIdEditing
+}) => {
   const isCompleted = status === 'completed';
-  const [isEditing, setEditing] = useState(false);
-  const todosList = useSelector((state) => state.todo.todosList);
 
-  const editTodoHandler = useCallback(
-    (e) => {
-      e.stopPropagation();
-      setEditing(true);
-    },
-    [todosList]
-  );
-
-  return isEditing ? (
-    <ChangeTodoField setEditing={setEditing} id={id} status={status} title={title} />
-  ) : (
+  return (
     <section
       className="flex items-center justify-between mb-4 rounded-2xl bg-zinc-800 p-5 w-full"
-      onClick={() => toggleTodoHandler(id)}>
+      onClick={(e) => toggleTodoHandler(e, id)}>
       <button className="flex items-center">
         <Check status={status} />
         <span
@@ -41,7 +33,7 @@ export const TodoItem = ({ id, title, status, toggleTodoHandler, removeTodoHandl
         </span>
       </button>
       <section>
-        <button onClick={(e) => editTodoHandler(e)}>
+        <button onClick={(e) => editTodoHandler(e, id, setIdEditing)}>
           <VscEdit
             size={22}
             className="text-gray-600 hover:text-pink-400 transition-colors ease-in-out duration-300 mr-6"
@@ -63,6 +55,8 @@ TodoItem.propTypes = {
   title: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   toggleTodoHandler: PropTypes.func.isRequired,
+  editTodoHandler: PropTypes.func.isRequired,
   removeTodoHandler: PropTypes.func.isRequired,
-  changeTodoHandler: PropTypes.func.isRequired
+  changeTodoHandler: PropTypes.func.isRequired,
+  setIdEditing: PropTypes.func.isRequired
 };

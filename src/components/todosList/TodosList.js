@@ -1,46 +1,30 @@
 // Core
-import { useCallback } from 'react';
+import { useState } from 'react';
 // Store
-import { useDispatch, useSelector } from 'react-redux';
-// Actions
-import { dataActions } from '../../redux/actions/dataActions';
+import { useSelector } from 'react-redux';
+// Hooks
+import { useTodoHandler } from '../../hooks';
 // Components
 import { TodoItem } from './item/TodoItem';
+import { ChangeTodoField } from '../changeTodoField/ChangeTodoField';
 
 export const TodosList = () => {
-  const dispatch = useDispatch();
-  const { setTodoItemState, removeTodoItem } = dataActions;
   const todosList = useSelector((state) => state.todo.todosList);
+  const [idEditing, setIdEditing] = useState('');
 
-  const toggleTodoHandler = useCallback(
-    (id) => {
-      dispatch(setTodoItemState(id));
-    },
-    [todosList]
-  );
-
-  const changeTodoHandler = useCallback(
-    (e, id) => {
-      e.stopPropagation();
-      dispatch(setTodoItemState(id));
-    },
-    [todosList]
-  );
-
-  const removeTodoHandler = useCallback(
-    (e, id) => {
-      e.stopPropagation();
-      dispatch(removeTodoItem(id));
-    },
-    [todosList]
-  );
+  const { toggleTodoHandler, removeTodoHandler, changeTodoHandler, editTodoHandler } =
+    useTodoHandler();
 
   const todosJSX = () => {
     return todosList.map((todo) => {
-      return (
+      return idEditing === todo.id ? (
+        <ChangeTodoField setIdEditing={setIdEditing} {...todo} />
+      ) : (
         <TodoItem
           key={todo.id}
           {...todo}
+          setIdEditing={setIdEditing}
+          editTodoHandler={editTodoHandler}
           toggleTodoHandler={toggleTodoHandler}
           removeTodoHandler={removeTodoHandler}
           changeTodoHandler={changeTodoHandler}
