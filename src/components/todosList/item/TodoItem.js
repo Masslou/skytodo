@@ -58,5 +58,5 @@ TodoItem.propTypes = {
   editTodoHandler: PropTypes.func.isRequired,
   removeTodoHandler: PropTypes.func.isRequired,
   changeTodoHandler: PropTypes.func.isRequired,
-  setIdEditing: PropTypes.func.isRequired
+  setIdEditing: PropTypes.func
 };

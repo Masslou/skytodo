@@ -18,7 +18,7 @@ export const TodosList = () => {
   const todosJSX = () => {
     return todosList.map((todo) => {
       return idEditing === todo.id ? (
-        <ChangeTodoField setIdEditing={setIdEditing} {...todo} />
+        <ChangeTodoField key={todo.id} setIdEditing={setIdEditing} {...todo} />
       ) : (
         <TodoItem
           key={todo.id}
@@ -32,5 +32,6 @@ export const TodosList = () => {
       );
     });
   };
+
   return <>{todosJSX()}</>;
 };

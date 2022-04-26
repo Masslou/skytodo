@@ -9,6 +9,7 @@ export const useTodoHandler = () => {
 
   const editTodoHandler = useCallback(
     (e, id, setIdEditing) => {
+      console.log('rerender');
       e.stopPropagation();
       setIdEditing(id);
     },
